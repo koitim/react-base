@@ -1,0 +1,28 @@
+{
+  "estorias": [
+    {
+      "titulo": "Renovar Seguro",
+      "descricao": "Eu como segurado gostaria de renovar meu seguro",
+      "pontos": "10",
+      "id": 3
+    },
+    {
+      "titulo": "Contratar Seguro",
+      "pontos": "10",
+      "descricao": "Como usuário, gostaria de contratar um seguro.",
+      "id": 4
+    },
+    {
+      "titulo": "Cancelar Seguro",
+      "pontos": "20",
+      "descricao": "Como usuário, gostaria de cancelar meu seguro.",
+      "id": 5
+    },
+    {
+      "titulo": "Dificílima",
+      "pontos": "150",
+      "descricao": "Essa é muito difícil",
+      "id": 6
+    }
+  ]
+}

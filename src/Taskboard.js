@@ -1,43 +1,32 @@
 import React from 'react';
 import Estoria from './Estoria';
 import EstoriaForm from './EstoriaForm';
+import axios from 'axios';
+
+const API_URL = 'http://localhost:3004/estorias/'
 
 export default class Taskboard extends React.Component {
 
     constructor() {
         super();
         this.state = {
-            estorias: [
-                {
-                    id: 1,
-                    titulo: "Contratar Seguro",
-                    texto: "Como usuário, gostaria de contratar um seguro.",
-                    pontos: 10
-                },
-                {
-                    id: 2,
-                    titulo: "Cancelar Seguro",
-                    texto: "Como usuário, gostaria de cancelar um seguro.",
-                    pontos: 20
-                },
-                {
-                    id: 3,
-                    titulo: "Poim poim",
-                    texto: "Blablabla Blablabla Blablabla .",
-                    pontos: 5
-                }
-            ]
+            estorias: []
         };
     }
 
-    _adicionarEstoria = (titulo, pontos, descricao) => {
-        const estoria = {
-            titulo,
-            descricao,
-            pontos,
-            id: this.state.estorias.length + 1
-        }
-        this.setState({estorias: this.state.estorias.concat([estoria])});
+    componentDidMount() {
+        this._buscarEstorias();
+    }
+
+    _adicionarEstoria = (estoria) => {
+        axios.post(API_URL, estoria)
+            .then(response => this._buscarEstorias());
+    }
+
+    _excluirEstoria = (id) => {
+        console.log(id);
+        axios.delete(API_URL + id)
+            .then(response => this._buscarEstorias());
     }
 
  render () {
@@ -49,7 +38,8 @@ export default class Taskboard extends React.Component {
                 <h1 className="header center orange-text">Estórias</h1>
                 <h3>{quantidadeEstorias} estórias</h3>
                 {estorias}
-                <EstoriaForm adicionarEstoria={this._adicionarEstoria}/>
+                <EstoriaForm 
+                    adicionarEstoria={this._adicionarEstoria}/>
             </div>
         </div>);
     } 
@@ -57,10 +47,15 @@ export default class Taskboard extends React.Component {
     _getEstorias() {
         return this.state.estorias.map( estoria =>
             <Estoria
-                titulo={estoria.titulo}
-                texto={estoria.texto}
-                pontos={estoria.pontos}
-                key={estoria.id}
+                estoria={estoria}
+                onDelete={this._excluirEstoria}
             />);
     }
+
+    _buscarEstorias() {
+        axios.get(API_URL)
+            .then(response => {this.setState({estorias: response.data})});
+    }
+
+    
 }

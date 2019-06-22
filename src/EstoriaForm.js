@@ -20,8 +20,8 @@ export default class EstoriaForm extends React.Component {
 
     _handleSubmit = e => {
         e.preventDefault();
-        const {titulo, pontos, descricao} = {...this.state};
-        this.props.adicionarEstoria(titulo, pontos, descricao);
+        const estoria = {...this.state};
+        this.props.adicionarEstoria(estoria);
         this.setState({...this.state, ...INITIAL_STATE});
     };
 
