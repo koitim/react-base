@@ -1,19 +1,56 @@
 import React from 'react';
-import Estoria from './Estoria';
-import EstoriaForm from './EstoriaForm';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import * as devActions from './actions/devActions';
 
-const API_URL = 'http://localhost:3004/estorias/'
-
-export default class Devs extends React.Component {
-
- render () {
-     return (
-        <div className="section no-pad-bot" id="index-banner">
-            <div className="container">
-                <h1 className="header center orange-text">Desenvolvedores</h1>
-                <h3>N desenvolvedores</h3>
-            </div>
-        </div>);
-    } 
+const INITIAL_STATE = {
+    nome: ""
 }
+
+class Devs extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            dev: INITIAL_STATE
+        }
+    }
+
+    onNameChange = event => {
+        const dev = { ...this.state.dev };
+        dev.nome = event.target.value;
+        this.setState({ dev });
+    }
+
+    onClickSave = event => {
+        //alert(`Salvando ${this.state.dev.nome}`);
+        this.props.dispatch(devActions.createDev(this.state.dev));
+        this.setState({...this.state.dev.nome, ...INITIAL_STATE});
+    }
+
+    devRow = (dev, index) => {
+        return <div key={index}>{dev.nome}</div>;
+    };
+
+    render() {
+        return (
+            <div className="container">
+                <h1>Desenvolvedores</h1>
+                {this.props.devs.map(this.devRow)}
+                <input type="text"
+                    onChange={this.onNameChange}
+                    value={this.state.dev.nome} />
+                <input type="submit"
+                    value="Salvar"
+                    onClick={this.onClickSave} />
+            </div>
+        );
+    }
+}
+
+function mapStateToProps(state) {
+    return {
+        devs: state.devs
+    };
+}
+
+export default connect(mapStateToProps)(Devs);
