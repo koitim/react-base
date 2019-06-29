@@ -3,11 +3,15 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {createDev} from './actions/devActions'
 import DevForm from './DevForm';
+import {Redirect} from 'react-router-dom';
 
 
-class MnageDev extends Component {
+class ManageDev extends Component {
 
     render() {
+        if (this.props.redirect) {
+            return <Redirect to='/devs'/>
+        }
         return (
             <div className="container">
                 <h1>Gerenciar Desenvolvedor</h1>
@@ -17,8 +21,11 @@ class MnageDev extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {redirect: state.devs.redirect}
+}
 function mapDispatchToProps(dispatch) {
     return bindActionCreators({createDev}, dispatch)
 }
 
-export default connect(null, mapDispatchToProps)(MnageDev);
+export default connect(mapStateToProps, mapDispatchToProps)(ManageDev);

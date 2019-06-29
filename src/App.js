@@ -8,6 +8,7 @@ import About from './About';
 import Devs from './Devs';
 import { Switch, Route } from 'react-router-dom';
 import ManageDev from './ManageDev';
+import Messages from './commons/Messages';
 
 class App extends Component {
   render() {
@@ -21,8 +22,8 @@ class App extends Component {
           <Route path='/dev/:id' component={ManageDev}/>
           <Route path='/about' component={About} />
         </Switch>
-
         <Rodape />
+        <Messages />
       </div>
     );
   }
