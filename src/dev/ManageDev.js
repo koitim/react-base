@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {createDev} from './actions/devActions'
+import {createDev} from '../actions/devActions'
 import DevForm from './DevForm';
 import {Redirect} from 'react-router-dom';
 

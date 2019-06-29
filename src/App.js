@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
-import Topo from './Topo';
-import Rodape from './Rodape';
-import Taskboard from './Taskboard';
+import Topo from './commons/Topo';
+import Rodape from './commons/Rodape';
+import Taskboard from './estorias/Taskboard';
 import About from './About';
-import Devs from './Devs';
+import Devs from './dev/Devs';
 import { Switch, Route } from 'react-router-dom';
-import ManageDev from './ManageDev';
+import ManageDev from './dev/ManageDev';
 import Messages from './commons/Messages';
 
 class App extends Component {

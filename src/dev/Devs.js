@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {loadDevs, manageDev} from './actions/devActions';
+import {loadDevs, manageDev} from '../actions/devActions';
 import { bindActionCreators } from 'redux';
 import DevList from './DevList';
 import {Link} from 'react-router-dom';
