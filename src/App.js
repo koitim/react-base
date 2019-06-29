@@ -7,20 +7,22 @@ import Taskboard from './Taskboard';
 import About from './About';
 import Devs from './Devs';
 import { Switch, Route } from 'react-router-dom';
+import ManageDev from './ManageDev';
 
 class App extends Component {
   render() {
     return (
-      <div>      
-          <Topo/>
+      <div>
+        <Topo />
+        <Switch>
+          <Route exact path='/' component={Taskboard} />
+          <Route path='/devs' component={Devs} />
+          <Route exact path='/dev' component={ManageDev}/>
+          <Route path='/dev/:id' component={ManageDev}/>
+          <Route path='/about' component={About} />
+        </Switch>
 
-          <Switch>
-            <Route exact path='/' component={Taskboard}/>
-            <Route path='/about' component={About}/>
-            <Route path='/devs' component={Devs}/>
-          </Switch>
-
-          <Rodape/>
+        <Rodape />
       </div>
     );
   }
